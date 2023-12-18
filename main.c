@@ -1,12 +1,19 @@
 #include "globfn.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
-    printf("This is before the delay.\n");
-    sleepS(2);
-    printf("This is after the delay.\n");
-    sleepMS(500);
-    printf("This is after another delay.\n");
-    
+    char* command = (char*)malloc(sizeof(char) * 101);
+
+    if (command == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    printf("Enter sum (max 100 char): ");
+    scanf("%100s", command);
+    printf("Print: %s", command);
+    free(command);
+
     return 0;
 }
