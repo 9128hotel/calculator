@@ -11,6 +11,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Debug - Show working directory
+      run: |
+        Write-Host "Working Directory: $PWD"
+        shell: powershell
+
     - name: Checkout Repository
       uses: actions/checkout@v2
 
