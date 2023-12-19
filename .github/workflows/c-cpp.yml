@@ -19,8 +19,7 @@ jobs:
 
     - name: Install GCC
       run: |
-        export MSYS2_PATH_TYPE=inherit
-        echo "export MSYS2_PATH_TYPE=inherit" >> $GITHUB_ENV
+        echo "::set-env name=MSYS2_PATH_TYPE::inherit"
         pacman --noconfirm -S mingw-w64-x86_64-gcc
         pacman -Qi mingw-w64-x86_64-gcc
 
