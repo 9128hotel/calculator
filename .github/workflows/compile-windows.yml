@@ -23,6 +23,7 @@ jobs:
     - name: Install Cygwin
       run: |
         choco install cygwin -y
+        refreshenv
 
     - name: Source Chocolatey Profile
       run: |
@@ -30,7 +31,7 @@ jobs:
 
     - name: Install GCC and Make with Cygwin
       run: |
-        Start-Process -Wait -FilePath "C:\tools\cygwin\setup-x86_64.exe" -ArgumentList "--quiet-mode --packages gcc-core,make"
+        Start-Process -Wait -FilePath "C:\tools\cygwin\cygwin.exe" -ArgumentList "--quiet-mode --packages gcc-core,make"
 
     - name: Build
       run: make calculator.exe
