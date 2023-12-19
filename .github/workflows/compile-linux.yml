@@ -1,4 +1,4 @@
-name: Compile test Linux
+name: Compile Linux
 
 on:
   push:
