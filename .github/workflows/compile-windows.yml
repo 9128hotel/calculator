@@ -17,7 +17,7 @@ jobs:
     - name: Set up MinGW
       uses: actions/setup-python@v2
       with:
-        python-version: "3.9"
+        python-version: "3.x" # Choose the appropriate version
         architecture: "x64"
 
     - name: Install Cygwin
@@ -30,7 +30,7 @@ jobs:
 
     - name: Install GCC and Make with Cygwin
       run: |
-        cygwin-setup.exe --quiet-mode --packages gcc-core,make
+        Start-Process -Wait -FilePath "C:\tools\cygwin\setup-x86_64.exe" -ArgumentList "--quiet-mode --packages gcc-core,make"
 
     - name: Build
       run: make calculator.exe
