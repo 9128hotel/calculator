@@ -31,8 +31,8 @@ jobs:
 
     - name: Install GCC and Make with Cygwin
       run: |
-        cygwin-setup.exe --quiet-mode --packages gcc-core
-        cygwin-setup.exe --quiet-mode --packages make
+        "C:\tools\Cygwin\setup-x86_64.exe" -q -P gcc-core
+        "C:\tools\Cygwin\setup-x86_64.exe" -q -P make
 
     - name: Build
       run: make calculator.exe
