@@ -19,7 +19,7 @@ jobs:
 
     - name: Install GCC
       run: |
-        echo "::set-env name=MSYS2_PATH_TYPE::inherit"
+        pacman --noconfirm -Syu
         pacman --noconfirm -S mingw-w64-x86_64-gcc
         pacman -Qi mingw-w64-x86_64-gcc
 
