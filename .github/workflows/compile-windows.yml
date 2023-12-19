@@ -35,7 +35,7 @@ jobs:
 
     - name: Install GCC and Make with Cygwin
       run: |
-        Start-Process -Wait -FilePath "C:\tools\Cygwin\setup-x86_64.exe" -ArgumentList "-q -P gcc-core,make"
+        "C:\tools\Cygwin\setup-x86_64.exe" -q -P gcc-core, make
 
     - name: Build
       run: make calculator.exe
