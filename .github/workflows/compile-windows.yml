@@ -17,17 +17,17 @@ jobs:
     - name: Set up MinGW
       uses: actions/setup-python@v2
       with:
-        python-version: "3.x" # Choose the appropriate version
+        python-version: "3.9"
         architecture: "x64"
 
     - name: Install Cygwin
       run: |
         choco install cygwin -y
-        refreshenv
 
     - name: Source Chocolatey Profile
       run: |
         Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+        refreshenv
 
     - name: Install GCC and Make with Cygwin
       run: |
