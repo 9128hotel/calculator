@@ -14,10 +14,12 @@ int main() {
     printf("Enter sum (max 100 char): ");
     scanf("%101[^\n]", raw); // don't use %s, it goes to a whitespace. %101[^\n] allows 100 characters and scans until a new line
 
-    printf("Print: %s\n", raw);
-    char* postparse = parse(raw);
+    char* parsed = parse(raw);
+    printf("%s", parsed);
+
+
     free(raw);
-    free(postparse);
+    free(parsed);
 
     return 0;
 }
