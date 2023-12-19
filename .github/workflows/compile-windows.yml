@@ -31,7 +31,8 @@ jobs:
 
     - name: Install GCC and Make with Cygwin
       run: |
-        Start-Process -Wait -FilePath "C:\tools\cygwin\cygwin.exe" -ArgumentList "--quiet-mode --packages gcc-core,make"
+        cygwin-setup.exe --quiet-mode --packages gcc-core
+        cygwin-setup.exe --quiet-mode --packages make
 
     - name: Build
       run: make calculator.exe
