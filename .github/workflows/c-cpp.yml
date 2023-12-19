@@ -14,11 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up GCC
+    - name: Set up MSYS2
       uses: msys2/setup-msys2@v2
 
     - name: Install GCC
-      run: pacman --noconfirm -S mingw-w64-x86_64-gcc
+      run: |
+        export MSYS2_PATH_TYPE=inherit
+        echo "export MSYS2_PATH_TYPE=inherit" >> $GITHUB_ENV
+        pacman --noconfirm -S mingw-w64-x86_64-gcc
+        pacman -Qi mingw-w64-x86_64-gcc
 
     - name: Build and Run
       run: |
