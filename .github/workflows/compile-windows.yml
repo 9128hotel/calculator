@@ -24,12 +24,9 @@ jobs:
         python-version: "3.12"
         architecture: "x64"
 
-    - name: Install Cygwin
+    - name: Install Cygwin and Configure Environment
       run: |
         choco install cygwin -y
-
-    - name: Add folder to PATH
-      run: |
         $folderPath = "C:\tools\Cygwin"
         $existingPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
 
@@ -40,9 +37,6 @@ jobs:
         } else {
             Write-Host "Folder is already in PATH."
         }
-
-    - name: Source Chocolatey Profile
-      run: |
         Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
         refreshenv
 
