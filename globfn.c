@@ -8,7 +8,6 @@
     #include <windows.h>
 #else
     #include <unistd.h>
-    #include <time.h>
 #endif
 
 int clearscreen() {
