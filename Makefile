@@ -21,4 +21,4 @@ clean:
 	rm -rf $(OBJ_DIR) # doesn't work, idk why
 
 check: calculator.exe
-    ./calculator.exe --check
+	./calculator.exe --check
