@@ -3,7 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char **argv) {
+    if (argc == 2) {
+        if (argv[1] == '--check') { // finish building a check once parser and simple opperations are done
+            return 0;
+        }
+    }
+
+
     char* raw = (char*)malloc(sizeof(char) * 101);
 
     if (raw == NULL) {
