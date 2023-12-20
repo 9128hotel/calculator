@@ -11,17 +11,38 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Debug - Show working directory
+      run: |
+        Write-Host "Working Directory: $PWD"
+
     - name: Checkout Repository
       uses: actions/checkout@v2
 
     - name: Set up MinGW
       uses: actions/setup-python@v2
       with:
-        python-version: "3.9"
+        python-version: "3.12"
         architecture: "x64"
 
-    - name: Install Dependencies
-      run: pacman -S --noconfirm mingw-w64-x86_64-gcc make
+    - name: Install Cygwin and Configure Environment
+      run: |
+        choco install cygwin -y
+        $folderPath = "C:\tools\Cygwin"
+        $existingPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
+
+        if (-not $existingPath.Contains($folderPath)) {
+            $newPath = $existingPath + ";" + $folderPath
+            [System.Environment]::SetEnvironmentVariable("Path", $newPath, [System.EnvironmentVariableTarget]::Machine)
+            Write-Host "Folder added to PATH."
+        } else {
+            Write-Host "Folder is already in PATH."
+        }
+        Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+        refreshenv
+
+    - name: Install GCC and Make with Cygwin
+      run: |
+        "C:\tools\Cygwin\setup-x86_64.exe" -q -P gcc-core, make
 
     - name: Build
       run: make calculator.exe
