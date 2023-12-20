@@ -28,10 +28,6 @@ jobs:
       run: |
         choco install cygwin -y
 
-    - name: Source Chocolatey Profile
-      run: |
-        Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-
     - name: Add folder to PATH
       run: |
         $folderPath = "C:\tools\Cygwin"
@@ -45,6 +41,9 @@ jobs:
             Write-Host "Folder is already in PATH."
         }
 
+    - name: Source Chocolatey Profile
+      run: |
+        Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
         refreshenv
 
     - name: Install GCC and Make with Cygwin
