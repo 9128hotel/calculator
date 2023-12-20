@@ -7,9 +7,9 @@
     #include <windows.h>
 #elif _POSIX_C_SOURCE >= 199309L
     #include <time.h>   // for nanosleep
-#else
+#elif defined(__linux__)
     #include <unistd.h> // for usleep
-#endif
+#endif // this could do with an else case
 
 int clearscreen() {
     #ifdef _WIN32
@@ -38,14 +38,12 @@ void sleepS(int seconds) {
 void sleepMS(int milliseconds) {
     #ifdef _WIN32
         Sleep(milliseconds);
-    #elif _POSIX_C_SOURCE >= 199309L
+    #elif _POSIX_C_SOURCE >= 199309L // old standard, shouldn't run
         struct timespec ts;
         ts.tv_sec = milliseconds / 1000;
         ts.tv_nsec = (milliseconds % 1000) * 1000000;
         nanosleep(&ts, NULL);
-    #else
-        if (milliseconds >= 1000)
-            sleep(milliseconds / 1000);
-        usleep((milliseconds % 1000) * 1000);
+    #elif defined(__linux__)
+        sleep(milliseconds / 1000);
     #endif
 }
