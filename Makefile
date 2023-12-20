@@ -15,6 +15,10 @@ $(OBJ_DIR):
 	mkdir $@
 
 .PHONY: clean
+.PHONY: check
 
 clean:
 	rm -rf $(OBJ_DIR) # doesn't work, idk why
+
+check: calculator.exe
+    ./calculator.exe --check
