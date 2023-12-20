@@ -6,6 +6,7 @@
 int main(int argc, char **argv) {
     if (argc == 2) {
         if (argv[1] == '--check') { // finish building a check once parser and simple opperations are done
+            printf("looks good\n");
             return 0;
         }
     }
