@@ -31,7 +31,6 @@ jobs:
     - name: Source Chocolatey Profile
       run: |
         Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-        refreshenv
 
     - name: Add folder to PATH
       run: |
@@ -45,6 +44,8 @@ jobs:
         } else {
             Write-Host "Folder is already in PATH."
         }
+
+        refreshenv
 
     - name: Install GCC and Make with Cygwin
       run: |
