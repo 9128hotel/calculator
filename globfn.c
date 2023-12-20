@@ -2,7 +2,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#elif _POSIX_C_SOURCE >= 199309L
+    #include <time.h>   // for nanosleep
+#else
+    #include <unistd.h> // for usleep
+#endif
 
 int clearscreen() {
     #ifdef _WIN32
@@ -27,14 +34,6 @@ void sleepS(int seconds) {
         sleep(seconds);
     #endif
 }
-
-#ifdef _WIN32
-    #include <windows.h>
-#elif _POSIX_C_SOURCE >= 199309L
-    #include <time.h>   // for nanosleep
-#else
-    #include <unistd.h> // for usleep
-#endif
 
 void sleepMS(int milliseconds) {
     #ifdef _WIN32
