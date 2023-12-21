@@ -1,12 +1,13 @@
-#include "globfn.h"
+#include "processor.h"
 #include "parser.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char **argv) {
     if (argc == 2) {
-        if (argv[1] == '--check') { // finish building a check once parser and simple opperations are done
-            printf("looks good\n");
+        if (strcmp(argv[1], "--check") == 0) {
+            printf("Looks good\n");
             return 0;
         }
     }
