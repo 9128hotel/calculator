@@ -3,6 +3,8 @@
         "time.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "parser.h": "c"
+        "parser.h": "c",
+        "globfn.h": "c",
+        "processor.h": "c"
     }
 }

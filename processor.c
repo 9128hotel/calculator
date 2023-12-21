@@ -1,49 +1,45 @@
-// global functions to be used in any file
-
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
-#ifdef _WIN32
-    #include <windows.h>
-#elif _POSIX_C_SOURCE >= 199309L
-    #include <time.h>   // for nanosleep
-#elif defined(__linux__)
-    #include <unistd.h> // for usleep
-#endif // this could do with an else case
+char* parse(char* command) {
 
-int clearscreen() {
-    #ifdef _WIN32
-        system("cls");  // Windows
-        return 0;
-    #elif defined(__linux__)
-        system("clear");  // Linux
-        return 0;
-    #elif defined(__APPLE__)
-        system("clear");  // MacOS
-        return 0;
-    #else
-        #error "Unsupported platform"
-        return 1;
-    #endif
-}
+    int len = strlen(command);
+    
+    // calculate memory required for parsed result
+    int memlen = 0;
+    for (int i = 0; i < len; i++) {
+        if (command[i] >= '0' && command[i] <= '9') {
+            memlen++;
+        } else if (command[i] == '+' || command[i] == '-' || command[i] == '*' || command[i] == '/') {
+            memlen += 3;
+        }
+    }
 
-void sleepS(int seconds) {
-    #ifdef _WIN32
-        Sleep(seconds * 1000);
-    #else
-        sleep(seconds);
-    #endif
-}
+    char* res = (char*)malloc(sizeof(char) * (memlen + 1)); // add 1 for null terminator
+    if (res == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
 
-void sleepMS(int milliseconds) {
-    #ifdef _WIN32
-        Sleep(milliseconds);
-    #elif _POSIX_C_SOURCE >= 199309L // old standard, shouldn't run
-        struct timespec ts;
-        ts.tv_sec = milliseconds / 1000;
-        ts.tv_nsec = (milliseconds % 1000) * 1000000;
-        nanosleep(&ts, NULL);
-    #elif defined(__linux__)
-        sleep(milliseconds / 1000);
-    #endif
+    int resPosition = 0;
+
+    // parse input
+    for (int i = 0; i < len; i++) {
+        if (command[i] >= '0' && command[i] <= '9') {
+            res[resPosition] = command[i];
+            resPosition++;
+        } else if (command[i] == '+' || command[i] == '-' || command[i] == '*' || command[i] == '/') {
+            res[resPosition] = '\x1F';
+            resPosition++;
+            res[resPosition] = command[i];
+            resPosition++;
+            res[resPosition] = '\x1F';
+            resPosition++;
+        }
+    }
+
+    res[resPosition] = '\0'; // null-terminate result string
+
+    return res;
 }

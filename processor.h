@@ -1,8 +1,6 @@
-#ifndef GLOBFN_H
-#define GLOBFN_H
+#ifndef PARSER_H
+#define PARSER_H
 
-int clearscreen();
-void sleepS(int seconds);
-void sleepMS(int milliseconds);
+char* parse(char* command);
 
 #endif
